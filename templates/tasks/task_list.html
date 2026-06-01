@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>TODO list</h1>
+
+  <br>
+
+  {% if task_list %}
+    <ul class="list-unstyled">
+      {% for task in task_list %}
+        <li>
+          <h3>
+            {{ task.content }}
+
+            {% if task.is_completed %}
+              <span class="text-success">Done</span>
+            {% else %}
+              <span class="text-danger">Not done</span>
+            {% endif %}
+          </h3>
+
+          <p>
+            Created: {{ task.created_at }}
+
+            {% if task.deadline %}
+              Deadline: {{ task.deadline }}
+            {% endif %}
+          </p>
+
+          <p class="text-muted">
+            Tags:
+            {% for tag in task.tags.all %}
+              {{ tag }}
+            {% empty %}
+              -
+            {% endfor %}
+          </p>
+        </li>
+        <hr>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no tasks in todo list</p>
+  {% endif %}
+{% endblock %}
