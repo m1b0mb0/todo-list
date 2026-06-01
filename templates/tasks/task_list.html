@@ -13,7 +13,7 @@
     <ul class="list-unstyled">
       {% for task in task_list %}
         <li>
-          <h3>
+          <h4>
             {{ task.content }}
 
             {% if task.is_completed %}
@@ -21,7 +21,21 @@
             {% else %}
               <span class="text-danger">Not done</span>
             {% endif %}
-          </h3>
+          </h4>
+
+          <form
+            action="{% url 'tasks:task-toggle-status' pk=task.id %}"
+            method="post"
+            style="display: inline;"
+          >
+            {% csrf_token %}
+
+            {% if task.is_completed %}
+              <button type="submit" class="btn btn-secondary link-to-page">Undo</button>
+            {% else %}
+              <button type="submit" class="btn btn-success link-to-page">Complete</button>
+            {% endif %}
+          </form>
 
           <p>
             Created: {{ task.created_at }}
