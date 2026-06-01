@@ -6,15 +6,25 @@
   </h1>
 
   {% if tag_list %}
-    <br>
-    <ul>
+    <table class="table">
+      <tr>
+        <th>Name</th>
+        <th>Update</th>
+      </tr>
+
       {% for tag in tag_list %}
-        <li>
-          {{ tag.name }}
-        </li>
+        <tr>
+          <td>
+            {{ tag.name }}
+          </td>
+          <td>
+            <a href="{% url 'tasks:tag-update' pk=tag.id %}" class="btn btn-secondary">Update</a>
+          </td>
+      </tr>
       {% endfor %}
-    </ul>
+    </table>
+
   {% else %}
-      <p>There are no tags.</p>
+    <p>There are no tags.</p>
   {% endif %}
 {% endblock %}
