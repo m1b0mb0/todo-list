@@ -1,5 +1,6 @@
 from django.views import generic
 from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, redirect
 
 from tasks.models import Task, Tag
 from tasks.forms import TaskForm
@@ -28,3 +29,12 @@ class TaskDeleteView(generic.DeleteView):
 
 class TagListView(generic.ListView):
     model = Tag
+
+
+def toggle_task_status(request, pk):
+    if request.method == "POST":
+        task = get_object_or_404(Task, pk=pk)
+        task.is_completed = not task.is_completed
+        task.save()
+
+        return redirect("tasks:task-list")
