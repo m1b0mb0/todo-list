@@ -31,6 +31,12 @@ class TagListView(generic.ListView):
     model = Tag
 
 
+class TagCreateView(generic.CreateView):
+    model = Tag
+    fields = "__all__"
+    success_url = reverse_lazy("tasks:tag-list")
+
+
 def toggle_task_status(request, pk):
     if request.method == "POST":
         task = get_object_or_404(Task, pk=pk)
