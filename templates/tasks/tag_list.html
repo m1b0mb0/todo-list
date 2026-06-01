@@ -10,6 +10,7 @@
       <tr>
         <th>Name</th>
         <th>Update</th>
+        <th>Delete</th>
       </tr>
 
       {% for tag in tag_list %}
@@ -19,6 +20,9 @@
           </td>
           <td>
             <a href="{% url 'tasks:tag-update' pk=tag.id %}" class="btn btn-secondary">Update</a>
+          </td>
+          <td>
+            <a href="{% url 'tasks:tag-delete' pk=tag.id %}" class="btn btn-secondary">Delete</a>
           </td>
       </tr>
       {% endfor %}

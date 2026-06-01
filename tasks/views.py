@@ -43,6 +43,11 @@ class TagUpdateView(generic.UpdateView):
     success_url = reverse_lazy("tasks:tag-list")
 
 
+class TagDeleteView(generic.DeleteView):
+    model = Tag
+    success_url = reverse_lazy("tasks:tag-list")
+
+
 def toggle_task_status(request, pk):
     if request.method == "POST":
         task = get_object_or_404(Task, pk=pk)
