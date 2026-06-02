@@ -48,9 +48,9 @@ class TagDeleteView(generic.DeleteView):
     success_url = reverse_lazy("tasks:tag-list")
 
 
-def toggle_task_status(request, pk):
-    if request.method == "POST":
-        task = get_object_or_404(Task, pk=pk)
+class ToggleTaskStatusView(generic.View):
+    def post(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs["pk"])
         task.is_completed = not task.is_completed
         task.save()
 
